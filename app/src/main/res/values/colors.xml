@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="va_bg">#0F1220</color>
+    <color name="va_card">#1A1F36</color>
+    <color name="va_text">#F2F4FF</color>
+    <color name="va_muted">#8D93B5</color>
+    <color name="va_accent">#6C7BFF</color>
+    <color name="va_listening">#FF5C7A</color>
+</resources>
