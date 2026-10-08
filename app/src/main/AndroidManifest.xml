@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Microphone access for SpeechRecognizer (runtime permission, requested in code) -->
+    <!-- Microphone for SpeechRecognizer -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <!-- Only needed because some devices' recognizers and the browser intents use the network.
-         The assistant itself makes no API calls. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Set alarms and timers in the Clock app -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <!-- Look up a contact's number for "call <name>" (requested only when you use it) -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- Louder voice (LoudnessEnhancer audio effect) -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
-    <!-- Don't hide the app from tablets/devices without a mic in Play; we handle it in code -->
     <uses-feature android:name="android.hardware.microphone" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
 
-    <!-- Android 11+ package visibility: without these, the app cannot see other apps/services -->
     <queries>
-        <!-- List launchable apps so "open <app>" works -->
         <intent>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent>
-        <!-- Required for SpeechRecognizer.isRecognitionAvailable() -->
         <intent>
             <action android:name="android.speech.RecognitionService" />
         </intent>
-        <!-- Required for TextToSpeech engine discovery -->
         <intent>
             <action android:name="android.intent.action.TTS_SERVICE" />
         </intent>
-        <!-- Browser / web search handlers -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
@@ -33,13 +32,23 @@
         <intent>
             <action android:name="android.intent.action.WEB_SEARCH" />
         </intent>
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SET_ALARM" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SET_TIMER" />
+        </intent>
     </queries>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:label="@string/app_name"
+        android:label="Sunita"
         android:supportsRtl="true"
         android:theme="@style/Theme.VoiceAssistant">
 
