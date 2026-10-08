@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Microphone for SpeechRecognizer -->
+    <!-- Microphone for SpeechRecognizer (runtime permission) -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Browser / web search, and some devices' speech recognizers -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Set alarms and timers in the Clock app -->
+    <!-- Flashlight. Torch mode usually needs no prompt; the app asks only if the phone demands it. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Alarms and timers in the Clock app -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <!-- Look up a contact's number for "call <name>" (requested only when you use it) -->
+    <!-- "Call <name>" and "WhatsApp <name>" contact lookup (asked only when you use them) -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <!-- Louder voice (LoudnessEnhancer audio effect) -->
+    <!-- Louder voice (LoudnessEnhancer) -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <uses-feature android:name="android.hardware.microphone" android:required="false" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
 
+    <!-- Android 11+ package visibility -->
     <queries>
+        <!-- Specific apps -->
+        <package android:name="com.whatsapp" />
+        <package android:name="com.whatsapp.w4b" />
+        <package android:name="com.google.android.youtube" />
+        <package android:name="com.android.chrome" />
+
+        <!-- Every launchable app, so "open <any app>" works -->
         <intent>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent>
+        <!-- Speech services -->
         <intent>
             <action android:name="android.speech.RecognitionService" />
         </intent>
         <intent>
             <action android:name="android.intent.action.TTS_SERVICE" />
         </intent>
+        <!-- Browser / search / dialer / clock / camera / settings -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
@@ -33,14 +47,27 @@
             <action android:name="android.intent.action.WEB_SEARCH" />
         </intent>
         <intent>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent>
+        <intent>
             <action android:name="android.intent.action.DIAL" />
             <data android:scheme="tel" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="text/plain" />
         </intent>
         <intent>
             <action android:name="android.intent.action.SET_ALARM" />
         </intent>
         <intent>
             <action android:name="android.intent.action.SET_TIMER" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.STILL_IMAGE_CAMERA" />
+        </intent>
+        <intent>
+            <action android:name="android.settings.SETTINGS" />
         </intent>
     </queries>
 
